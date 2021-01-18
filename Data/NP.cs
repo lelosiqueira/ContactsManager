@@ -1,5 +1,7 @@
 ﻿using ContactsManager.Interface;
 using ContactsManager.Models;
+using Microsoft.AspNetCore.Http;
+using ContactsManager.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,11 +12,27 @@ namespace ContactsManager.Data
   /// </summary>
   public class NP : INP
   {
-    List<NaturalPerson> _lstNP { get; set; }
-    public NP()
+    List<NaturalPerson> lstNP = new List<NaturalPerson>();
+    /// <summary>
+    /// list of NP using Session
+    /// </summary>
+    List<NaturalPerson> _lstNP { get {
+        if (httpcontext.Session.GetObject<List<NaturalPerson>>("lstNP") == null)
+          return new List<NaturalPerson>();
+        else
+        return httpcontext.Session.GetObject<List<NaturalPerson>>("lstNP");
+      } set {
+        httpcontext.Session.SetObject<List<NaturalPerson>>("lstNP", value);
+      } }
+    HttpContext httpcontext { get; set; }
+
+    /// <summary>
+    /// this constructor uses Http for Session reasons
+    /// </summary>
+    /// <param name="context"></param>
+    public NP(HttpContext context)
     {
-      _lstNP = new List<NaturalPerson>();
-      _lstNP.Add(new NaturalPerson() { Name = "Leandro", CPF = "353.720.908-80", address = new Address() { Line1 = "r. teste", City = "jundiai", State = "SP"} });
+      httpcontext = context;
     }
     /// <summary>
     /// List all Natural Persons
@@ -30,7 +48,9 @@ namespace ContactsManager.Data
     /// <param name="np"></param>
     public void Insert(NaturalPerson np)
     {
-      _lstNP.Add(np);
+      lstNP = _lstNP;
+      lstNP.Add(np);
+      _lstNP = lstNP;
     }
     /// <summary>
     /// edit natural person
@@ -38,7 +58,10 @@ namespace ContactsManager.Data
     /// <param name="np"></param>
     public void Update(NaturalPerson np)
     {
-
+      lstNP = _lstNP;
+      lstNP.Remove(lstNP.Where(t => t.CPF == np.CPF).FirstOrDefault());
+      lstNP.Add(np);
+      _lstNP = lstNP;
     }
     /// <summary>
     /// get natural person by CPF
@@ -56,7 +79,11 @@ namespace ContactsManager.Data
     /// <param name="cpf"></param>
     public void Delete(string cpf)
     {
-
+      lstNP = _lstNP;
+      lstNP.Remove(lstNP.Where(t => t.CPF == cpf).FirstOrDefault());
+      _lstNP = lstNP;
     }
+
   }
+  
 }

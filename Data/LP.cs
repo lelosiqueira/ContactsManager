@@ -1,6 +1,9 @@
 ﻿using ContactsManager.Interface;
 using ContactsManager.Models;
+using ContactsManager.Utils;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ContactsManager.Data
 {
@@ -9,14 +12,36 @@ namespace ContactsManager.Data
   /// </summary>
   public class LP : ILP
   {
-    List<LegalPerson> _lstLP { get; set; }
-    public LP()
+    List<LegalPerson> lstLP = new List<LegalPerson>();
+    /// <summary>
+    /// list of lp using Session
+    /// </summary>
+    List<LegalPerson> _lstLP
     {
-      _lstLP = new List<LegalPerson>();
-      _lstLP.Add(new LegalPerson() { TradeName = "Company 1", CNPJ = "33.517.359/0001-90", address = new Address() { Line1 = "faria lima", City = "Sao Paulo", State = "SP" } });
+      get
+      {
+        if (httpcontext.Session.GetObject<List<LegalPerson>>("lstLP") == null)
+          return new List<LegalPerson>();
+        else
+          return httpcontext.Session.GetObject<List<LegalPerson>>("lstLP");
+      }
+      set
+      {
+        httpcontext.Session.SetObject<List<LegalPerson>>("lstLP", value);
+      }
+    }
+    HttpContext httpcontext { get; set; }
+
+    /// <summary>
+    /// this constructor uses Http for Session reasons
+    /// </summary>
+    /// <param name="context"></param>
+    public LP(HttpContext context)
+    {
+      httpcontext = context;
     }
     /// <summary>
-    /// List all Legal Persons
+    /// List all legal Persons
     /// </summary>
     /// <returns></returns>
     public IEnumerable<LegalPerson> GetAllLP()
@@ -24,38 +49,46 @@ namespace ContactsManager.Data
       return _lstLP;
     }
     /// <summary>
-    /// insert new Legal person
+    /// insert new legal person
     /// </summary>
     /// <param name="np"></param>
     public void Insert(LegalPerson lp)
     {
-      _lstLP.Add(lp);
+      lstLP = _lstLP;
+      lstLP.Add(lp);
+      _lstLP = lstLP;
     }
     /// <summary>
-    /// edit Legal person
+    /// edit legal person
     /// </summary>
-    /// <param name="np"></param>
+    /// <param name="lp"></param>
     public void Update(LegalPerson lp)
     {
-
+      lstLP = _lstLP;
+      lstLP.Remove(lstLP.Where(t => t.CNPJ == lp.CNPJ).FirstOrDefault());
+      lstLP.Add(lp);
+      _lstLP = lstLP;
     }
     /// <summary>
-    /// get Legal person by CPF
+    /// get legal person by cnpj
     /// </summary>
-    /// <param name="cpf"></param>
+    /// <param name="cnpj"></param>
     /// <returns></returns>
-    public LegalPerson GetLP(string cpf)
+    public LegalPerson GetLP(string cnpj)
     {
-      LegalPerson lp = new LegalPerson();
+      var lp = _lstLP.Where(t => t.CNPJ == cnpj).FirstOrDefault();
       return lp;
     }
     /// <summary>
-    /// delete Legal person by cpf
+    /// delete legal person by cnpj
     /// </summary>
-    /// <param name="cpf"></param>
-    public void Delete(string cpf)
+    /// <param name="cnpj"></param>
+    public void Delete(string cnpj)
     {
-
+      lstLP = _lstLP;
+      lstLP.Remove(lstLP.Where(t => t.CNPJ == cnpj).FirstOrDefault());
+      _lstLP = lstLP;
     }
+
   }
 }

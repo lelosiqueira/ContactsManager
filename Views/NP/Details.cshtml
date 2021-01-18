@@ -1,0 +1,72 @@
+﻿@model ContactsManager.Models.NaturalPerson
+
+<div>
+    <h4>NaturalPerson</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.ZipCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.ZipCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.Country)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.State)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.Line1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.Line1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.address.Line2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.address.Line2)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Update", new { cpf = Model.CPF }) |
+    <a asp-action="Index">Back to List</a>
+</div>

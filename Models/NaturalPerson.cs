@@ -14,7 +14,7 @@ namespace ContactsManager.Models
     public string Name { get; set; }
     [Required(ErrorMessage = "Please Enter CPF")]
     [Display(Name = "CPF:")]
-    [CustomValidationCPF(ErrorMessage = "Invalid CPF")]
+    [CustomValidationCPF(ErrorMessage = "Invalid CPF : pattern 999.999.999-99")]
     public string CPF { get; set; }
     [Display(Name = "Birthday:")]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

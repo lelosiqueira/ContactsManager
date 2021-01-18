@@ -119,3 +119,10 @@ C:\projetos\ContactsManager\ContactsManager\bin\Debug\netcoreapp3.1\System.Web.W
 C:\projetos\ContactsManager\ContactsManager\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\LP\Index.cshtml.g.cs
 C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\NP\Update.cshtml.g.cs
+C:\projetos\ContactsManager\ContactsManager\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\projetos\ContactsManager\ContactsManager\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\projetos\ContactsManager\ContactsManager\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\NP\Details.cshtml.g.cs
+C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\LP\Details.cshtml.g.cs
+C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\LP\Update.cshtml.g.cs
+C:\projetos\ContactsManager\ContactsManager\obj\Debug\netcoreapp3.1\Razor\Views\LP\Insert.cshtml.g.cs
